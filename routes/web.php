@@ -11,5 +11,7 @@ Route::get('/companies/search', [CompanyController::class, 'search'])->name('com
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('companies', CompanyController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('companies', CompanyController::class);
+});
