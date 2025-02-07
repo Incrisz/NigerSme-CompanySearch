@@ -20,13 +20,13 @@ class CompanyController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'company_name' => 'required|string|max:255',
-            'company_number' => 'required|string|max:255',
-            'status' => 'required|in:Active,Inactive',
-            'phone' => 'required|string|max:15',
-            'email' => 'required|email|unique:companies,email'
-        ]);
+        // $request->validate([
+        //     'company_name' => 'required|string|max:255',
+        //     'company_number' => 'required|string|max:255',
+        //     'status' => 'required|in:Active,Inactive',
+        //     'phone' => 'required|string|max:15',
+        //     'email' => 'required|email|unique:companies,email'
+        // ]);
 
         Company::create($request->all());
 
@@ -40,13 +40,14 @@ class CompanyController extends Controller
 
     public function update(Request $request, Company $company)
     {
-        $request->validate([
-            'company_name' => 'required|string|max:255',
-            'company_number' => 'required|string|max:255',
-            'status' => 'required|in:Active,Inactive',
-            'phone' => 'required|string|max:15',
-            'email' => 'required|email|unique:companies,email,' . $company->id
-        ]);
+        // $request->validate([
+        //     'company_name' => 'required|string|max:255',
+        //     'company_number' => 'required|string|max:255',
+        //     'status' => 'required|in:Active,Inactive',
+        //     'phone' => 'required|string|max:15',
+        //     'email' => 'required|email|unique:companies,email,' . $company->id
+        // ]);
+        dd($request->all()); // Debugging line
 
         $company->update($request->all());
 
