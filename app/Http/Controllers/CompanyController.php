@@ -17,7 +17,8 @@ class CompanyController extends Controller
         ->orWhere('company_number', 'LIKE', "%$query%")
         ->get();
 
-    return view('companies.search', compact('companies', 'query'));
+    // return view('companies.search', compact('companies', 'query'));
+    return view('welcome', compact('companies', 'query'));
 }
 
     public function index()
