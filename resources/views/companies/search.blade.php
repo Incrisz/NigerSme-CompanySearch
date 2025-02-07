@@ -10,30 +10,32 @@
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
 
-    @if(isset($companies) && $companies->isNotEmpty())
-        <h3 class="mt-4">Search Results</h3>
-        <table class="table table-bordered mt-3">
-            <thead>
-                <tr>
-                    <th>Company Name</th>
-                    <th>Company Number</th>
-                    <th>Email</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($companies as $company)
+    @if(request('query')) 
+        @if(isset($companies) && $companies->isNotEmpty())
+            <h3 class="mt-4">Search Results</h3>
+            <table class="table table-bordered mt-3">
+                <thead>
                     <tr>
-                        <td>{{ $company->company_name }}</td>
-                        <td>{{ $company->company_number }}</td>
-                        <td>{{ $company->email }}</td>
-                        <td>{{ $company->status }}</td>
+                        <th>Company Name</th>
+                        <th>Company Number</th>
+                        <th>Email</th>
+                        <th>Status</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @elseif(request('query'))
-        <p class="mt-3">No results found for "{{ request('query') }}"</p>
+                </thead>
+                <tbody>
+                    @foreach($companies as $company)
+                        <tr>
+                            <td>{{ $company->company_name }}</td>
+                            <td>{{ $company->company_number }}</td>
+                            <td>{{ $company->email }}</td>
+                            <td>{{ $company->status }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <p class="mt-3">No results found for "{{ request('query') }}"</p>
+        @endif
     @endif
 </div>
 @endsection
