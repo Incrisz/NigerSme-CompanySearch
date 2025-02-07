@@ -47,7 +47,7 @@ class CompanyController extends Controller
         //     'phone' => 'required|string|max:15',
         //     'email' => 'required|email|unique:companies,email,' . $company->id
         // ]);
-        dd($request->all()); // Debugging line
+        // dd($request->all()); // Debugging line
 
         $company->update($request->all());
 
