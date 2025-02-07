@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Table Edit') <!-- Define the page title -->
+
 @section('content')
 <div class="container">
     <h2>Edit Company</h2>
