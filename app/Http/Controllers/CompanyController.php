@@ -7,6 +7,19 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+
+    public function search(Request $request)
+{
+    $query = $request->input('query'); // Get the search query
+
+    $companies = Company::where('company_name', 'LIKE', "%$query%")
+        ->orWhere('email', 'LIKE', "%$query%")
+        ->orWhere('company_number', 'LIKE', "%$query%")
+        ->get();
+
+    return view('companies.search', compact('companies', 'query'));
+}
+
     public function index()
     {
         $companies = Company::all();
@@ -49,7 +62,15 @@ class CompanyController extends Controller
         // ]);
         // dd($request->all()); // Debugging line
 
-        $company->update($request->all());
+        // $company->update($request->all());
+        $company->update([
+            'company_name' => $request->company_name,
+            'company_number' => $request->company_number,
+            'status' => $request->status,
+            'phone' => $request->phone,
+            'email' => $request->email,
+        ]);
+        
 
         return redirect()->route('companies.index')->with('success', 'Company updated successfully.');
     }
