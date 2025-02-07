@@ -148,28 +148,30 @@ Minna, Niger State.</a></div>
                             <p>Search for registered companies by name, number, phone, or email.</p>
                             
                             <!-- Search Form -->
-                            <form method="POST">
-                                <input type="text" name="query" class="form-control mb-3" placeholder="Enter Company Name, Number, Phone, or Email" required>
+                            <form action="{{ route('companies.search') }}" method="GET">
+                                <input type="text" name="query" class="form-control mb-3" placeholder="Enter Company Name, Number, Phone, or Email" required value="{{ request('query') }}">
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </form>
-                
+
                             <!-- Output Section -->
-                            <div class="search-results">
-                       
-                     
-                               
-                                        <h3>Search Results:</h3>
-                                           <div class='p-3 border rounded mb-3'>
-                                            <p><strong>Name:</strong> </p>
-                                            <p><strong>Company Number:</strong> </p>
-                                            <p><strong>Phone:</strong> </p>
-                                            <p><strong>Email:</strong> </p>
-                                
-                                            </div>
-                                 
-                                
-                                
-                            </div>
+                            @if(request('query')) 
+                                @if(isset($companies) && $companies->isNotEmpty())
+                                    <h3 class="mt-4">Search Results:</h3>
+                                    @foreach($companies as $company)
+                                        <div class='p-3 border rounded mb-3'>
+                                            <p><strong>Name:</strong> {{ $company->company_name }}</p>
+                                            <p><strong>Company Number:</strong> {{ $company->company_number }}</p>
+                                            <p><strong>Status:</strong> 
+                                                <span class="{{ $company->status == 'Active' ? 'status-active' : 'status-inactive' }}">
+                                                    {{ $company->status }}
+                                                </span>
+                                            </p>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <p class="mt-3 text-danger">No company found.</p>
+                                @endif
+                            @endif
                 
                         </div>
                         <div class="col-lg-6">
